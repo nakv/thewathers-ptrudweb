@@ -6,7 +6,6 @@ import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 import Breadcrumbs from 'components/extended/Breadcrumbs';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
-import navigation from 'menu-items';
 import { drawerWidth } from 'store/constant';
 import { IconChevronRight } from '@tabler/icons';
 import { setMenu, toggleSidebar } from 'store/sidebarReducer';
@@ -55,7 +54,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     })
 }));
 
-const MainLayout = () => {
+const AdminLayout = () => {
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
     const leftDrawerOpened = useSelector((state) => state.sidebar.open);
@@ -84,7 +83,7 @@ const MainLayout = () => {
                 }}
             >
                 <Toolbar>
-                    <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+                    <Header handleLeftDrawerToggle={handleLeftDrawerToggle} hideSearch />
                 </Toolbar>
             </AppBar>
 
@@ -99,4 +98,4 @@ const MainLayout = () => {
     );
 };
 
-export default MainLayout;
+export default AdminLayout;

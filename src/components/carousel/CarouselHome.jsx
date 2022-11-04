@@ -25,7 +25,7 @@ const useStyles = makeStyles({
             height: '10px',
             backgroundColor: '#fff'
         },
-        '& .swiper-pagination-bullet-active': { backgroundColor: '#673ab7' },
+        '& .swiper-pagination-bullet-active': { backgroundColor: '#ff2825' },
         '& .swiper-slide-active': { width: '100%' }
     },
     carouselItem: {
@@ -61,9 +61,11 @@ const useStyles = makeStyles({
 const CarouselHome = () => {
     const classes = useStyles();
     const images = [
-        'https://wallpaperaccess.com/full/124378.jpg',
-        'https://image.winudf.com/v2/image/Y29tLkRyZWFtV2FsbHBhcGVycy5Cb29rMDFfc2NyZWVuc2hvdHNfMF9mNzdhNGRiNw/screen-0.jpg?fakeurl=1&type=.webp',
-        'https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTF8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'
+        'https://cdn3.dhht.vn/wp-content/uploads/2020/12/banner-trang-suc.jpg',
+        'https://cdn3.dhht.vn/wp-content/uploads/2019/02/BANNER_sieu-mong.jpg',
+        'https://cdn3.dhht.vn/wp-content/uploads/2021/02/gioi-thieu-doxa-grandemetre-tuyet-tac-dong-ho-phien-ban-gioi-han.jpg',
+        'https://cdn3.dhht.vn/wp-content/uploads/2019/02/BANNER_vang-18k.jpg',
+        'https://cdn3.dhht.vn/wp-content/uploads/2019/06/banner-dong-ho-dinh-kim-cuong.jpg'
     ];
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);

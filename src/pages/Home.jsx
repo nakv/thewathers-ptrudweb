@@ -7,43 +7,43 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 const sampleData = [
     {
         id: 0,
-        name: 'product 1',
+        name: 'Đồng hồ 1',
         description: 'Ga osi ovemosoki kon hohon raepi jegjoted no ki waetahe',
-        image: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg',
-        price: '30000',
+        image: 'https://cdn3.dhht.vn/wp-content/uploads/2019/04/69_RE-AV0001S00B.jpg',
+        price: '300000',
         rating: 4.5
     },
     {
         id: 1,
-        name: 'product 1',
+        name: 'Đồng hồ 2',
         description: 'Ga osi ovemosoki kon hohon raepi jegjoted no ki waetahe',
-        image: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg',
-        price: '30000',
-        rating: 4.5
+        image: 'https://cdn3.dhht.vn/wp-content/uploads/2019/04/69_RE-AV0001S00B.jpg',
+        price: '600000',
+        rating: 3
     },
     {
         id: 2,
-        name: 'product 1',
+        name: 'Đồng hồ 3',
         description: 'Ga osi ovemosoki kon hohon raepi jegjoted no ki waetahe',
-        image: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg',
+        image: 'https://cdn3.dhht.vn/wp-content/uploads/2019/04/69_RE-AV0001S00B.jpg',
         price: '30000',
-        rating: 4.5
+        rating: 3
     },
     {
         id: 3,
-        name: 'product 1',
+        name: 'Đồng hồ orient',
         description: 'Ga osi ovemosoki kon hohon raepi jegjoted no ki waetahe',
-        image: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg',
+        image: 'https://cdn3.dhht.vn/wp-content/uploads/2019/04/69_RE-AV0001S00B.jpg',
         price: '30000',
         rating: 4.5
     },
     {
         id: 4,
-        name: 'product 1',
+        name: 'Đồng hồ 4',
         description: 'Ga osi ovemosoki kon hohon raepi jegjoted no ki waetahe',
-        image: 'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x2.jpg',
+        image: 'https://cdn3.dhht.vn/wp-content/uploads/2019/04/69_RE-AV0001S00B.jpg',
         price: '30000',
-        rating: 4.5
+        rating: 4
     }
 ];
 
@@ -55,9 +55,9 @@ const Home = () => {
             <CarouselHome />
             <ProductCardItems
                 data={sampleData}
-                title="Xu hướng mua sắm"
+                title="Đồng hồ bán chạy nhất!"
                 titleIcon={<LocalFireDepartmentIcon color="error" />}
-                titleBackground="#FCDDEF"
+                titleBackground="#ffec00"
             />
         </Container>
     );

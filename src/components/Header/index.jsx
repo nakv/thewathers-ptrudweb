@@ -15,9 +15,7 @@ import { IconMenu2 } from '@tabler/icons';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
-const Header = ({ handleLeftDrawerToggle, hideSidebarIcon = false }) => {
-    const theme = useTheme();
-
+const Header = ({ handleLeftDrawerToggle, hideSidebarIcon = false, hideSearch = false }) => {
     return (
         <>
             {/* logo & toggler button */}
@@ -58,7 +56,8 @@ const Header = ({ handleLeftDrawerToggle, hideSidebarIcon = false }) => {
             </Box>
 
             {/* header search */}
-            <SearchSection />
+
+            {!hideSearch && <SearchSection />}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
 
@@ -71,7 +70,8 @@ const Header = ({ handleLeftDrawerToggle, hideSidebarIcon = false }) => {
 
 Header.propTypes = {
     handleLeftDrawerToggle: PropTypes.func,
-    hideSidebarIcon: PropTypes.bool
+    hideSidebarIcon: PropTypes.bool,
+    hideSearch: PropTypes.bool
 };
 
 export default Header;
