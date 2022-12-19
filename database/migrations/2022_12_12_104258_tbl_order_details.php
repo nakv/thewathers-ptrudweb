@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('product_price');
             $table->integer('product_sales_quantity');
+            $table->foreign('order_id')->references('order_id')->on('tbl_order');
+            $table->foreign('product_id')->references('product_id')->on('tbl_product');
             $table->timestamps();
         });
     }

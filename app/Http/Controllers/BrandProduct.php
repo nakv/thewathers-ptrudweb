@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 session_start();
 
-class brandProduct extends Controller
+class BrandProduct extends Controller
 {
     public function AuthLogin()
     {
