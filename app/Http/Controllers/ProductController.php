@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 session_start();
 
 class ProductController extends Controller
 {
+    //Start Admin Page
+    
+    /**
+     * Check login
+     */
     public function AuthLogin()
     {
         $admin_id = Session()->get('admin_id');
@@ -21,6 +27,11 @@ class ProductController extends Controller
             return Redirect::to('admin')->send();
         }
     }
+
+    /**
+     * Dispaly view add product
+     */
+
     public function add_product()
     {
         $this->AuthLogin();
@@ -28,6 +39,10 @@ class ProductController extends Controller
         $brand_product = DB::table('tbl_brand')->orderby('brand_id', 'desc')->get();
         return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
+
+    /**
+     *  Display a listing of product
+     */
     public function all_product()
     {
         $this->AuthLogin();
@@ -38,9 +53,31 @@ class ProductController extends Controller
         $manager_product = view('admin.all_product')->with('all_product', $all_product);
         return view('admin_layout')->with('admin.all_product', $manager_product);
     }
+
+    /**
+     * Store a newly created product in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @return Redirect
+     */
     public function save_product(Request $request)
     {
         $this->AuthLogin();
+
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|string',
+            'product_price' => 'required|numeric',
+            'product_desc' => 'required|string',
+            'product_content' => 'required|string',
+            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
+            'product_status' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session()->put('message', 'Lỗi! Vui lòng kiểm tra lại thông tin sản phẩm');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['product_name'] = $request->product_name;
         $data['product_price'] = $request->product_price;
@@ -49,6 +86,7 @@ class ProductController extends Controller
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
+
         $get_img = $request->file('product_image');
         if ($get_img) {
             $get_img_name = $get_img->getClientOriginalName();
@@ -60,11 +98,16 @@ class ProductController extends Controller
             $request->session()->put('message', 'Thêm sản phẩm thành công');
             return Redirect::to('all-product');
         }
+
         $data['product_image'] = '';
         DB::table('tbl_product')->insert($data);
         $request->session()->put('message', 'Thêm sản phẩm thành công');
         return Redirect::to('all-product');
     }
+
+    /**
+     * Unactive a product
+     */
     public function unactive_product($product_id)
     {
         $this->AuthLogin();
@@ -74,6 +117,10 @@ class ProductController extends Controller
         session()->put('message', 'Đã hủy kích hoạt sản phẩm');
         return Redirect::to('/all-product');
     }
+
+    /**
+     * Active a product
+     */
     public function active_product($product_id)
     {
         $this->AuthLogin();
@@ -83,6 +130,7 @@ class ProductController extends Controller
         session()->put('message', 'Đã kích hoạt sản phẩm');
         return Redirect::to('/all-product');
     }
+
     public function edit_product($product_id)
     {
         $this->AuthLogin();
@@ -93,9 +141,33 @@ class ProductController extends Controller
 
         return view('admin_layout')->with('admin.edit_product', $manager_product);
     }
+
+    /**
+     *  Update the specified product in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $product_id
+     * @return Redirect
+     */
+
     public function update_product(Request $request, $product_id)
     {
         $this->AuthLogin();
+
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|string',
+            'product_price' => 'required|numeric',
+            'product_desc' => 'required|string',
+            'product_content' => 'required|string',
+            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
+            'product_status' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session()->put('message', 'Lỗi! Vui lòng kiểm tra lại thông tin sản phẩm');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['product_name'] = $request->product_name;
         $data['product_price'] = $request->product_price;
@@ -119,6 +191,12 @@ class ProductController extends Controller
         $request->session()->put('message', 'Cập nhật sản phẩm thành công!');
         return Redirect::to('all-product');
     }
+
+    /**
+     * Remove the specified product from storage.
+     * @param  int  $product_id
+     * @return Redirect
+     */
     public function delete_product($product_id)
     {
         $this->AuthLogin();
@@ -128,6 +206,14 @@ class ProductController extends Controller
         session()->put('message', 'Xóa sản phẩm thành công!');
         return Redirect::to('/all-product');
     }
+
+    // End function Admin Page
+
+    /**
+     * Show the application dashboard.
+     * @return view
+     */
+
     // Home handler
     public function details_product($product_id)
     {

@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 
-// use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-// use Gloudemans\Shoppingcart\Cart;
-// use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -23,6 +20,7 @@ class CartController extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         return view('pages.cart.cart_ajax')->with('category', $cate_product)->with('brand', $brand_product);
     }
+
     public function add_to_cartajax(Request $request)
     {
         $data = $request->all();
@@ -68,6 +66,7 @@ class CartController extends Controller
         Session::put('cart', $cart);
         Session::save();
     }
+
     public function delete_product_cart($sessionID)
     {
         $cart = Session::get('cart');
@@ -82,6 +81,7 @@ class CartController extends Controller
         }
         return Redirect()->back()->with('message', 'Xóa sản phẩm thất bại!');
     }
+
     public function update_cart(Request $request)
     {
         $data = $request->all();
@@ -99,6 +99,7 @@ class CartController extends Controller
         }
         return Redirect()->back()->with('message', 'Cập nhật số lượng thất bại!');
     }
+
     public function save_cart(Request $request)
     {
         $productId = $request->productid_hidden;
@@ -114,20 +115,22 @@ class CartController extends Controller
         // Cart::destroy();
         return Redirect::to('/show-cart');
     }
+
     public function show_cart()
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         return view('pages.cart.show_cart')->with('category', $cate_product)->with('brand', $brand_product);
     }
+
     public function delete_to_cart($rowId)
     {
         Cart::remove($rowId);
         return Redirect::to('/show-cart');
     }
+
     public function update_cart_quantity(Request $request, $rowId)
     {
-
         $qty = $request->cart_quantity;
         Cart::update($rowId, $qty);
         return Redirect::to('/show-cart');

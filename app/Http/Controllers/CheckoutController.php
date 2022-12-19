@@ -17,7 +17,8 @@ use App\Models\Feeship;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Shipping;
-
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Session\SessionBagProxy;
 
 session_start();
@@ -34,14 +35,33 @@ class CheckoutController extends Controller
             return Redirect::to('admin')->send();
         }
     }
+
+    /**
+     *
+     */
     public function login_checkout()
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         return view('pages.checkout.login_checkout')->with('category', $cate_product)->with('brand', $brand_product);
     }
+
     public function add_customer(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'customer_name' => 'required',
+                'customer_email' => 'required|email|unique:tbl_customers,customer_email',
+                'customer_password' => 'required|min:6|max:20',
+                'customer_phone' => 'required|digits:10',
+            ]
+        );
+
+        if ($validator->fails()) {
+            Session::flash('error', 'Đăng ký không thành công');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $data = array();
         $data['customer_name'] = $request->customer_name;
         $data['customer_email'] = $request->customer_email;
@@ -52,6 +72,7 @@ class CheckoutController extends Controller
         Session::put('customer_name', $request->customer_name);
         return Redirect::to('/checkout');
     }
+
     public function checkout()
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
@@ -59,6 +80,7 @@ class CheckoutController extends Controller
         $city = City::orderby('name_city', 'ASC')->get();
         return view('pages.checkout.show_checkout')->with('category', $cate_product)->with('brand', $brand_product)->with('city', $city);
     }
+
     public function save_checkout_customer(Request $request)
     {
         $data = array();
@@ -78,6 +100,7 @@ class CheckoutController extends Controller
         Session::flush();
         return Redirect('/login-checkout');
     }
+
     public function login_customer(Request $request)
     {
         $email = $request->email_account;
@@ -91,12 +114,14 @@ class CheckoutController extends Controller
             return Redirect::to('/login-checkout');
         }
     }
+
     public function payment()
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         return view('pages.checkout.payment')->with('category', $cate_product)->with('brand', $brand_product);
     }
+
     public function order_place(Request $request)
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
@@ -143,6 +168,7 @@ class CheckoutController extends Controller
                 echo ('something went wrong!');
         }
     }
+
     public function manage_order()
     {
         $this->AuthLogin();
@@ -153,6 +179,7 @@ class CheckoutController extends Controller
         $manager_order = view('admin.manage_order')->with('all_order', $all_order);
         return view('admin_layout')->with('admin.manage_order', $manager_order);
     }
+
     public function view_order($orderId)
     {
         $this->AuthLogin();
@@ -168,6 +195,7 @@ class CheckoutController extends Controller
         $manage_order_by_id = view('admin.view_order')->with('order_by_id', $order_by_id)->with('products', $products);
         return view('admin_layout')->with('admin.view_order', $manage_order_by_id);
     }
+
     public function select_delivery_user(Request $request)
     {
 
@@ -190,6 +218,7 @@ class CheckoutController extends Controller
         }
         echo $output;
     }
+
     public function calculate_fee(Request $request)
     {
         $data = $request->all();
@@ -219,10 +248,25 @@ class CheckoutController extends Controller
         Session::forget('address_delivery');
         return Redirect::back();
     }
+
     public function confirm_order(Request $request)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $data = $request->all();
+        $validator = Validator::make($data, [
+            'shipping_name' => 'required|string|max:255',
+            'shipping_email' => 'required|email',
+            'shipping_phone' => 'required|digits:10',
+            'shipping_address' => 'required',
+            'shipping_note' => 'required',
+            'payment_select' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('error', 'Vui lòng nhập đầy đủ thông tin');
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
         $shipping = new Shipping;
         $shipping->shipping_name = $data['shipping_name'];
         $shipping->shipping_email = $data['shipping_email'];

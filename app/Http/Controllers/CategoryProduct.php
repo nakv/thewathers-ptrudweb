@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\Session\Session;
+
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 session_start();
 
@@ -21,11 +23,13 @@ class CategoryProduct extends Controller
             return Redirect::to('admin')->send();
         }
     }
+
     public function add_category_product()
     {
         $this->AuthLogin();
         return view('admin.add_category_product');
     }
+
     public function all_category_product()
     {
         $this->AuthLogin();
@@ -33,9 +37,24 @@ class CategoryProduct extends Controller
         $manager_category_product = view('admin.all_category_product')->with('all_category_product', $all_category_product);
         return view('admin_layout')->with('admin.all_category_product', $manager_category_product);
     }
+
     public function save_category_product(Request $request)
     {
         $this->AuthLogin();
+        $validator = Validator::make($request->all(), [
+            'category_product_name' => 'required',
+            'category_product_desc' => 'required',
+            'category_product_status' => 'required',
+        ], [
+            'category_product_name.required' => 'Tên danh mục không được để trống',
+            'category_product_desc.required' => 'Mô tả danh mục không được để trống',
+            'category_product_status.required' => 'Trạng thái danh mục không được để trống',
+        ]);
+        if ($validator->fails()) {
+            $request->session->put('message', 'Thêm danh mục sản phẩm thất bại');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['category_name'] = $request->category_product_name;
         $data['category_desc'] = $request->category_product_desc;
@@ -44,6 +63,7 @@ class CategoryProduct extends Controller
         $request->session()->put('message', 'Thêm danh mục sản phẩm thành công');
         return Redirect::to('/add-category-product');
     }
+
     public function unactive_category_product($category_id)
     {
         $this->AuthLogin();
@@ -53,6 +73,7 @@ class CategoryProduct extends Controller
         session()->put('message', 'Đã ẩn danh mục');
         return Redirect::to('/all-category-product');
     }
+
     public function active_category_product($category_id)
     {
         $this->AuthLogin();
@@ -62,6 +83,7 @@ class CategoryProduct extends Controller
         session()->put('message', 'Đã hiện danh mục');
         return Redirect::to('/all-category-product');
     }
+
     public function edit_category_product($category_id)
     {
         $this->AuthLogin();
@@ -71,9 +93,23 @@ class CategoryProduct extends Controller
         $manager_category_product = view('admin.edit_category_product')->with('edit_category_product', $edit_category_product);
         return view('admin_layout')->with('admin.edit_category_product', $manager_category_product);
     }
+
     public function update_category_product(Request $request, $category_id)
     {
         $this->AuthLogin();
+        $validator = Validator::make($request->all(), [
+            'category_product_name' => 'required',
+            'category_product_desc' => 'required',
+        ], [
+            'category_product_name.required' => 'Tên danh mục không được để trống',
+            'category_product_desc.required' => 'Mô tả danh mục không được để trống',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session->put('message', 'Cập nhật danh mục sản phẩm thất bại');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['category_name'] = $request->category_product_name;
         $data['category_desc'] = $request->category_product_desc;
@@ -83,6 +119,7 @@ class CategoryProduct extends Controller
         $request->session()->put('message', 'Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
+
     public function delete_category_product($category_id)
     {
         $this->AuthLogin();
@@ -92,6 +129,7 @@ class CategoryProduct extends Controller
         session()->put('message', 'Xóa danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
+
     // Home display category product
     public function show_category_home($category_id)
     {

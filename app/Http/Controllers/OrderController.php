@@ -11,6 +11,11 @@ use App\Models\Customer;
 
 class OrderController extends Controller
 {
+    /**
+     * Display a listing of the order.
+     * @param  int $OrderCode
+     * @return view
+     */
     public function view_order($OrderCode)
     {
         $order = Order::where('order_code', $OrderCode)->get();
@@ -26,6 +31,7 @@ class OrderController extends Controller
 
         return view('admin.view_order')->with(compact('order', 'detail', 'customer', 'shipping', 'od_details'));
     }
+
     public function manage_order()
     {
         $order = Order::orderby('created_at', 'DESC')->get();

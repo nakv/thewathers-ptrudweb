@@ -21,15 +21,18 @@ class AdminController extends Controller
             return Redirect::to('admin')->send();
         }
     }
+
     public function index()
     {
         return view('admin_login');
     }
+
     public function show_dashboard()
     {
         $this->AuthLogin();
         return view('admin.dashboard');
     }
+
     public function dashboard(Request $request)
     {
         $this->AuthLogin();
@@ -46,6 +49,7 @@ class AdminController extends Controller
             return Redirect::to('/admin');
         }
     }
+    
     public function logout()
     {
         $this->AuthLogin();
