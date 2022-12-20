@@ -110,7 +110,7 @@ class CartController extends Controller
         $product['name'] = $product_info->product_name;
         $product['price'] = $product_info->product_price;
         $product['image'] = $product_info->product_image;
-        //ADD
+        //ADD cart
         $session_id = substr(md5(microtime()), rand(0, 26), 5);
         $cart = Session::get('cart');
         if ($cart == true) {
