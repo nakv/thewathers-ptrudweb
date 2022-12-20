@@ -105,6 +105,7 @@ class CartController extends Controller
         $productId = $request->productid_hidden;
         $quantity = $request->quanty;
         $product_info = DB::table('tbl_product')->where('product_id', $productId)->first();
+<<<<<<< HEAD
         $data['id'] = $product_info->product_id;
         $data['qty'] = $quantity;
         $data['name'] = $product_info->product_name;
@@ -114,6 +115,11 @@ class CartController extends Controller
         Cart::add($data);
         // Cart::destroy();
         return Redirect::to('/show-cart');
+=======
+        $product['price'] = $product_info->product_price;
+        //ADD cart
+        //ADD
+>>>>>>> parent of 1459f0d... Merge remote-tracking branch 'origin/fix_layout' into fix_layout
     }
 
     public function show_cart()
