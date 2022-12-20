@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_customers', function (Blueprint $table) {
-            $table->increments('customer_id');
+            $table->bigIncrements('customer_id');
             $table->string('customer_name');
             $table->string('customer_email');
             $table->string('customer_password');
