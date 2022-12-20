@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('product_price');
             $table->string('product_image');
             $table->integer('product_status');
+            $table->integer('product_quantity');
             $table->foreign('category_id')->references('category_id')->on('tbl_category_product');
             $table->foreign('brand_id')->references('brand_id')->on('tbl_brand');
             $table->timestamps();
