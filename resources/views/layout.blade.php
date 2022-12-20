@@ -56,6 +56,11 @@
                                 <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart"></i> Giỏ
                                         hàng</a></li>
                                 <li>
+                                    <a href="{{ URL::to('/my-order') }}">
+                                        <i class="fa fa-list" aria-hidden="true"></i>Đơn hàng
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ URL::to('/logout-checkout') }}">
                                         <i class="fa fa-sign-out"></i> Đăng
                                         xuất
@@ -68,6 +73,11 @@
                                 </li>
                                 <li><a href="{{ URL::to('/show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ
                                         hàng</a></li>
+                                <li>
+                                    <a href="{{ URL::to('/') }}">
+                                        <i class="fa fa-receipt"> </i>Đơn hàng
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ URL::to('/logout-checkout') }}">
                                         <i class="fa fa-sign-out"></i> Đăng
@@ -146,7 +156,6 @@
                                 <div class="col-sm-12">
                                     <img src="{{ asset('public/frontend/images/banner-website-1.jpg') }}"
                                         class="img-responsive2" alt="Ảnh slider" />
-
                                 </div>
                             </div>
 
@@ -338,8 +347,6 @@
     <script src="{{ asset('public/frontend/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('public/frontend/js/main.js') }}"></script>
     <script src="{{ asset('public/frontend/js/sweetalert.min.js') }}"></script>
-    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('.add-to-cart').on('click', function(e) {
@@ -447,8 +454,8 @@
     {{-- Send Order --}}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.send_order').click(function() {
-
+            $('.send_order').click(function(e) {
+                e.preventDefault();
                 var shipping_name = $('.shipping_name').val();
                 var shipping_phone = $('.shipping_phone').val();
                 var shipping_email = $('.shipping_email').val();
@@ -478,7 +485,17 @@
                             _token: _token
                         },
                         success: function() {
-                            alert('Đặt hàng thành công!');
+                            swal({
+                                title: "Đặt hàng thành công!",
+                                text: "Đơn hàng của bạn đang chờ xác nhận.",
+                                type: "success",
+                                timer: 3000,
+                                showConfirmButton: false
+                            });
+                            window.setTimeout(function() {
+                                location.reload();
+                            }, 3000);
+
                         }
 
                     });

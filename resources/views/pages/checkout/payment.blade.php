@@ -51,8 +51,7 @@
                                             {{ csrf_field() }}
                                             <input size="3" class="cart_quantity_input" type="text"
                                                 name="cart_quantity" value="{{ $v_content->qty }}">
-                                            {{-- <input type="hidden" value="{{ $v_content->rowId }}" name="rowId_cart"
-                                              class="form-control"> --}}
+
                                             <button style="padding: 3px" type="submit" value="Cập nhật" name="update_qty"
                                                 class="btn btn-default btn-sm">Cập nhật</button>
                                         </form>

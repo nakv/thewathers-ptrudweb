@@ -33,9 +33,10 @@
                             <?php $stt++; ?>
 
                             <tr>
-                                <td><a href="{{ URL::to('/view-order/' . $od->order_code) }}">{{ $stt }}</a>
+                                <td><a href="{{ URL::to('/my-order-detail/' . $od->order_code) }}">{{ $stt }}</a>
                                 </td>
-                                <td><a href="{{ URL::to('/view-order/' . $od->order_code) }}">{{ $od->order_code }}</a></td>
+                                <td><a href="{{ URL::to('/my-order-detail/' . $od->order_code) }}">{{ $od->order_code }}</a>
+                                </td>
                                 <td>{{ $od->customer_id }}</td>
                                 <td>{{ $od->order_status }}</td>
                                 <td>{{ date('H:i:s d-m-Y', strtotime($od->created_at)) }}</td>

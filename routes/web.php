@@ -107,8 +107,10 @@ Route::get('/manage-order', 'App\Http\Controllers\OrderController@manage_order')
 Route::get('/view-order/{OrderCode}', 'App\Http\Controllers\OrderController@view_order');
 // Route::get('/manage-order', 'App\Http\Controllers\CheckoutController@manage_order');
 // Route::get('/view-order/{orderId}', 'App\Http\Controllers\CheckoutController@view_order');
-
-
+//User order
+Route::get('/my-order', 'App\Http\Controllers\OrderController@my_order');
+Route::get('/my-order-detail/{OrderCode}', 'App\Http\Controllers\OrderController@my_order_detail');
+//Cart ajax
 Route::post('/add-cart-ajax', [CartController::class, 'addCartAjax'])->name('cart.add');
 
 
