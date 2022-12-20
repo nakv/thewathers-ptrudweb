@@ -6165,9 +6165,3 @@ td.visible-print {
         display: none !important;
     }
 }
-.img-responsive2 {
-    display: block;
-    height: 250px;
-    max-width: 1000px;
-    margin-right: 16px;
-}
