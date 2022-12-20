@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('shipping_address');
             $table->string('shipping_phone');
             $table->string('shipping_email');
+            $table->foreign('customer_id')->references('customer_id')->on('tbl_customer');
             $table->timestamps();
         });
     }

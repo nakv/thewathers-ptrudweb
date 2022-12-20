@@ -11,12 +11,14 @@ use Illuminate\Http\Request;
 // session_start();
 class DeliveryController extends Controller
 {
+    
     public function delivery(Request $request)
     {
         $city = City::orderby('name_city', 'ASC')->get();
 
         return view('admin.delivery.add_delivery')->with(compact('city'));
     }
+
     public function select_delivery(Request $request)
     {
         $data = $request->all();
@@ -38,6 +40,7 @@ class DeliveryController extends Controller
         }
         echo $output;
     }
+
     public function insert_delivery(Request $request)
     {
         $data = $request->all();
@@ -49,6 +52,7 @@ class DeliveryController extends Controller
         $fee_ship->save();
         // session()->put('message', 'Xóa danh mục sản phẩm thành công');
     }
+
     public function select_feeship()
     {
         $feeship = Feeship::orderby('fee_id', 'DESC')->get();
@@ -79,6 +83,7 @@ class DeliveryController extends Controller
         </div>';
         echo $output;
     }
+
     public function update_feeship(Request $request)
     {
         $data = $request->all();

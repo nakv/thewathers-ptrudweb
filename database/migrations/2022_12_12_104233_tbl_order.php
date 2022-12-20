@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('payment_id');
             $table->string('order_total');
             $table->string('order_status');
+            $table->foreign('customer_id')->references('customer_id')->on('tbl_customer');
+            $table->foreign('shipping_id')->references('shipping_id')->on('tbl_shipping');
+            $table->foreign('payment_id')->references('payment_id')->on('tbl_payment');
             $table->timestamps();
         });
     }

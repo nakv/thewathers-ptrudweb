@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 session_start();
 
-class brandProduct extends Controller
+class BrandProduct extends Controller
 {
     public function AuthLogin()
     {
@@ -21,11 +22,13 @@ class brandProduct extends Controller
             return Redirect::to('admin')->send();
         }
     }
+
     public function add_brand_product()
     {
         $this->AuthLogin();
         return view('admin.add_brand_product');
     }
+
     public function all_brand_product()
     {
         $this->AuthLogin();
@@ -33,9 +36,25 @@ class brandProduct extends Controller
         $manager_brand_product = view('admin.all_brand_product')->with('all_brand_product', $all_brand_product);
         return view('admin_layout')->with('admin.all_brand_product', $manager_brand_product);
     }
+
     public function save_brand_product(Request $request)
     {
         $this->AuthLogin();
+        $validator = Validator::make($request->all(), [
+            'brand_product_name' => 'required',
+            'brand_product_desc' => 'required',
+            'brand_product_status' => 'required|numeric',
+        ], [
+            'brand_product_name.required' => 'Tên thương hiệu không được để trống',
+            'brand_product_desc.required' => 'Mô tả thương hiệu không được để trống',
+            'brand_product_status.required' => 'Trạng thái thương hiệu không được để trống',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session->put('massage', 'Thêm thương hiệu sản phẩm thất bại');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['brand_name'] = $request->brand_product_name;
         $data['brand_desc'] = $request->brand_product_desc;
@@ -44,6 +63,7 @@ class brandProduct extends Controller
         $request->session()->put('message', 'Thêm thương hiệu sản phẩm thành công');
         return Redirect::to('/add-brand-product');
     }
+
     public function unactive_brand_product($brand_id)
     {
         $this->AuthLogin();
@@ -53,6 +73,7 @@ class brandProduct extends Controller
         session()->put('message', 'Đã hủy kích hoạt thương hiệu');
         return Redirect::to('/all-brand-product');
     }
+
     public function active_brand_product($brand_id)
     {
         $this->AuthLogin();
@@ -62,6 +83,7 @@ class brandProduct extends Controller
         session()->put('message', 'Đã kích hoạt thương hiệu');
         return Redirect::to('/all-brand-product');
     }
+
     public function edit_brand_product($brand_id)
     {
         $this->AuthLogin();
@@ -71,9 +93,23 @@ class brandProduct extends Controller
         $manager_brand_product = view('admin.edit_brand_product')->with('edit_brand_product', $edit_brand_product);
         return view('admin_layout')->with('admin.edit_brand_product', $manager_brand_product);
     }
+
     public function update_brand_product(Request $request, $brand_id)
     {
         $this->AuthLogin();
+        $validator = Validator::make($request->all(), [
+            'brand_product_name' => 'required|string',
+            'brand_product_desc' => 'required',
+        ], [
+            'brand_product_name.required' => 'Tên thương hiệu không được để trống',
+            'brand_product_desc.required' => 'Mô tả thương hiệu không được để trống',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session->put('massage', 'Cập nhật thương hiệu thất bại');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = [];
         $data['brand_name'] = $request->brand_product_name;
         $data['brand_desc'] = $request->brand_product_desc;
@@ -83,6 +119,7 @@ class brandProduct extends Controller
         $request->session()->put('message', 'Cập nhật thương hiệu thành công');
         return Redirect::to('/all-brand-product');
     }
+
     public function delete_brand_product($brand_id)
     {
         $this->AuthLogin();
@@ -92,6 +129,7 @@ class brandProduct extends Controller
         session()->put('message', 'Xóa thương hiệu thành công');
         return Redirect::to('/all-brand-product');
     }
+
     //Home display
     public function show_brand_home($brand_id)
     {
