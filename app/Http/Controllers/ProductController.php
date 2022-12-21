@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 
-session_start();
+// session_start();
 
 class ProductController extends Controller
 {
@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         DB::table('tbl_product')->where('product_id', $id)->update([
-            'product_quantity' => $product->quantity - $quantity
+            'product_quantity' => $product->product_quantity - $quantity
         ]);
     }
     //Start Admin Page
