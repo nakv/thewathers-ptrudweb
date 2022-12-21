@@ -105,6 +105,7 @@ Route::post('/confirm-order', 'App\Http\Controllers\CheckoutController@confirm_o
 
 Route::get('/manage-order', 'App\Http\Controllers\OrderController@manage_order');
 Route::get('/view-order/{OrderCode}', 'App\Http\Controllers\OrderController@view_order');
+Route::get('/delete-order/{OrderCode}', 'App\Http\Controllers\OrderController@delete_order');
 
 Route::post('/update-order-status/{OrderCode}', 'App\Http\Controllers\OrderController@update_order_status');
 

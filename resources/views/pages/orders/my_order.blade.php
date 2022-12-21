@@ -19,7 +19,7 @@
                             <th>STT</th>
                             <th>Mã đơn hàng</th>
                             <th>Tình trạng</th>
-                            <th>Thời gian</th>
+                            <th>Ngày đặt</th>
                             <th>Mua lại</th>
                         </tr>
 

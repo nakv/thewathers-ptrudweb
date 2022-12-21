@@ -74,4 +74,11 @@ class OrderController extends Controller
         $request->session()->put('message', 'Cập nhật trạng thái đơn hàng thành công');
         return Redirect::to('/manage-order');
     }
+    public function delete_order($OrderCode)
+    {
+        Order::where('order_code', $OrderCode)->delete();
+        OrderDetails::where('order_code', $OrderCode)->delete();
+        session()->put('message', 'Xóa sản đơn hàng!');
+        return Redirect::to('/manage-order');
+    }
 }

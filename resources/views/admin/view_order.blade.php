@@ -214,6 +214,9 @@
                                     case 6:
                                         echo '<h4>Đang vận chuyển</h4>';
                                         break;
+                                    case 7:
+                                        echo '<h4>Đã giao hàng</h4>';
+                                        break;
                                     default:
                                         echo 'Lỗi tình trạng';
                                 }
