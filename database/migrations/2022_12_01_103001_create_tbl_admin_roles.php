@@ -14,9 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_admin_roles', function (Blueprint $table) {
-            $table->increments('id_admin_role');
-            $table->integer('admin_admin_id');
-            $table->integer('role_id_role');
+            $table->bigIncrements('id_admin_role');
+            $table->unsignedBigInteger('admin_admin_id');
+            $table->unsignedBigInteger('role_id_role');
+            $table->foreign('admin_admin_id')->references('admin_id')->on('tbl_admin');
+            $table->foreign('role_id_role')->references('id_role')->on('tbl_roles');
             $table->timestamps();
         });
     }

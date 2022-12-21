@@ -17,7 +17,8 @@ return new class extends Migration
             $table->bigIncrements('maqh');
             $table->string('name_qh');
             $table->string('type');
-            $table->string('matp');
+            $table->unsignedBigInteger('matp');
+            $table->foreign('matp')->references('matp')->on('tbl_tinhthanhpho');
             $table->timestamps();
         });
     }

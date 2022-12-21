@@ -13,6 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('tbl_payment');
+
         Schema::create('tbl_payment', function (Blueprint $table) {
             $table->bigIncrements('payment_id');
             $table->string('payment_method');
