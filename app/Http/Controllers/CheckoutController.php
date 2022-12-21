@@ -48,7 +48,7 @@ class CheckoutController extends Controller
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
-        
+
         return view('pages.checkout.login_checkout')->with('category', $cate_product)->with('brand', $brand_product);
     }
 
@@ -280,7 +280,7 @@ class CheckoutController extends Controller
         $validator = Validator::make($data, [
             'shipping_name' => 'required|string|max:255',
             'shipping_email' => 'required|email',
-            'shipping_phone' => 'required|digits:10',
+            'shipping_phone' => 'required|+:10',
             'shipping_address' => 'required',
             'shipping_note' => 'required',
             'payment_select' => 'required',

@@ -30,6 +30,10 @@ Route::get('/admin', 'App\Http\Controllers\AdminController@index');
 Route::get('/dashboard', 'App\Http\Controllers\AdminController@show_dashboard');
 Route::get('/logout', 'App\Http\Controllers\AdminController@logout');
 Route::post('/admin-dashboard', 'App\Http\Controllers\AdminController@dashboard');
+//ADMIN Auth role
+Route::get('/register-auth', 'App\Http\Controllers\AuthController@register_auth');
+Route::post('/register', 'App\Http\Controllers\AuthController@register');
+
 // Category Product
 Route::get('/all-category-product', 'App\Http\Controllers\CategoryProduct@all_category_product');
 Route::get('/add-category-product', 'App\Http\Controllers\CategoryProduct@add_category_product');

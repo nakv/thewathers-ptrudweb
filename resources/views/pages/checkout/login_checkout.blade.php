@@ -44,11 +44,14 @@
                         <form action="{{ URL::to('/add-customer') }}" method="POST">
                             {{ csrf_field() }}
                             <label for="customer_name">Họ và tên</label>
-                            <input name="customer_name" type="text" placeholder="Nhập họ và tên" required />
+                            <input name="customer_name" type="text" placeholder="Nhập họ và tên" required
+                                value="{{ old('customer_name') }}" />
                             <label for="customer_email">Email</label>
-                            <input name="customer_email" type="email" placeholder="Nhập Email" required />
+                            <input name="customer_email" type="email" placeholder="Nhập Email" required
+                                value="{{ old('customer_email') }}" />
                             <label for="customer_phone">Số điện thoại (10 số) </label>
-                            <input name="customer_phone" type="text" placeholder="Nhập số điện thoại" required />
+                            <input name="customer_phone" type="text" placeholder="Nhập số điện thoại" required
+                                value="{{ old('customer_phone') }}" />
                             <label for="customer_password">Mật khẩu </label>
                             <input name="customer_password" type="password" placeholder="Nhập mật khẩu (6 - 10 ký tự)"
                                 required />
