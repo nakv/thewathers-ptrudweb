@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -17,9 +18,13 @@ use App\Models\Feeship;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Shipping;
+use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Session\SessionBagProxy;
+use App\Http\Controllers\ProductController;
+use GuzzleHttp\Handler\Proxy;
 
 session_start();
 
@@ -83,6 +88,17 @@ class CheckoutController extends Controller
 
     public function save_checkout_customer(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'shipping_name' => 'required',
+            'shipping_email' => 'required|email',
+            'shipping_phone' => 'required|digits:10',
+            'shipping_address' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $request->session->put('massage', 'Tạo shipping không thành công');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $data = array();
         $data['shipping_name'] = $request->shipping_name;
         $data['shipping_email'] = $request->shipping_email;
@@ -249,6 +265,10 @@ class CheckoutController extends Controller
         return Redirect::back();
     }
 
+    /**
+     * Confirm order and save to database
+     * @param Request $request
+     */
     public function confirm_order(Request $request)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -263,7 +283,7 @@ class CheckoutController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Session::flash('error', 'Vui lòng nhập đầy đủ thông tin');
+            $request->session->put('masseage', 'Vui lòng nhập đầy đủ thông tin');
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
@@ -296,8 +316,11 @@ class CheckoutController extends Controller
                 $detail->product_sales_quantity = $cart['product_qty'];
                 $detail->order_feeship = $data['order_fee'];
                 $detail->save();
+
+                ProductController::reduceProduct($cart['product_id'], $cart['product_qty']);
             }
         }
+
         Session::forget('cart');
         Session::forget('fee');
     }

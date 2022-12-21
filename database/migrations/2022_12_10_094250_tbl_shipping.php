@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_shipping', function (Blueprint $table) {
-            $table->increments('shipping_id');
+            $table->bigIncrements('shipping_id');
             $table->string('shipping_name');
-            $table->integer('customer_id');
+            $table->unsignedBigInteger('customer_id');
             $table->string('shipping_address');
             $table->string('shipping_phone');
             $table->string('shipping_email');
-            $table->foreign('customer_id')->references('customer_id')->on('tbl_customer');
+            $table->foreign('customer_id')->references('customer_id')->on('tbl_customers');
             $table->timestamps();
         });
     }
