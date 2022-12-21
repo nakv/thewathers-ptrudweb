@@ -50,9 +50,12 @@
                                 $shipping_id = Session::get('shipping_id');
                                 if ($customer_id!=NULL && $shipping_id ==NULL) {
                                 ?>
+                                <li style="margin-top:10px"><span>Xin chào,
+                                        <strong>{{ Session::get('customer_name') }}</strong></span></li>
                                 <li><a href="{{ URL::to('/payment') }}"><i class="fa fa-credit-card"></i> Thanh
                                         toán</a>
                                 </li>
+
                                 <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart"></i> Giỏ
                                         hàng</a></li>
                                 <li>
@@ -68,6 +71,8 @@
                                 </li>
 
                                 <?php } elseif($customer_id != NULL && $shipping_id != NULL){?>
+                                <li style="margin-top:10px"><span>Xin chào,
+                                        <strong>{{ Session::get('customer_name') }}</strong></span></li>
                                 <li><a href="{{ URL::to('/payment') }}"><i class="fa fa-credit-card"></i> Thanh
                                         toán</a>
                                 </li>

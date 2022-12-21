@@ -48,6 +48,7 @@ class CheckoutController extends Controller
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
+        
         return view('pages.checkout.login_checkout')->with('category', $cate_product)->with('brand', $brand_product);
     }
 
@@ -64,7 +65,7 @@ class CheckoutController extends Controller
         );
 
         if ($validator->fails()) {
-            Session::flash('error', 'Đăng ký không thành công');
+            Session::flash('error', 'Đăng ký không thành công.');
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = array();
@@ -75,7 +76,7 @@ class CheckoutController extends Controller
         $customer_id = DB::table('tbl_customers')->insertGetId($data);
         Session::put('customer_id',  $customer_id);
         Session::put('customer_name', $request->customer_name);
-        return Redirect::to('/checkout');
+        return Redirect::to('/');
     }
 
     public function checkout()
@@ -127,6 +128,7 @@ class CheckoutController extends Controller
             Session::put('customer_name',  $result->customer_name);
             return Redirect::to('/checkout');
         } else {
+            Session::put('message', 'Đăng nhập không thành công, sai email hoặc mật khẩu!');
             return Redirect::to('/login-checkout');
         }
     }
