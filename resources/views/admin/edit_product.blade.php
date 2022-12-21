@@ -30,6 +30,11 @@
                                         value="{{ $pro->product_price }}">
                                 </div>
                                 <div class="form-group">
+                                    <label for="product_quantity">Số lượng</label>
+                                    <input type="text" name="product_quantity" class="form-control"
+                                        value="{{ $pro->product_quantity }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="product_image">Hình ảnh sản phẩm</label>
                                     <img src="{{ URL::to('public/uploads/product/' . $pro->product_image) }}"
                                         alt="{{ 'Ảnh sản phẩm ' . $pro->product_name }}" width="300" height="auto">

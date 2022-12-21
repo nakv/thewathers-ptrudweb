@@ -55,17 +55,13 @@ class OrderController extends Controller
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
-        $order = Order::where('order_code', $OrderCode)->get();
+        $order = Order::where('order_code', $OrderCode)->first();
         $detail = OrderDetails::where('order_code', $OrderCode)->get();
-        foreach ($order as $key => $od) {
-            $customer_id = $od->customer_id;
-            $shipping_id = $od->shipping_id;
-        }
-        $customer = Customer::where('customer_id', $customer_id)->first();
-        $shipping = Shipping::where('shipping_id', $shipping_id)->first();
+
+        $shipping = Shipping::where('shipping_id',  $order->shipping_id)->first();
 
         $od_details = OrderDetails::with('product')->where('order_code', $OrderCode)->get();
 
-        return view('pages.orders.my_order_detail')->with(compact('order', 'detail', 'customer', 'shipping', 'od_details'))->with('category', $cate_product)->with('brand', $brand_product);
+        return view('pages.orders.my_order_detail')->with(compact('order', 'detail', 'shipping', 'od_details'))->with('category', $cate_product)->with('brand', $brand_product);
     }
 }

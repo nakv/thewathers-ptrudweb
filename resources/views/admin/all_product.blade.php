@@ -7,13 +7,7 @@
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
-                    <select class="input-sm form-control w-sm inline v-middle">
-                        <option value="0">Bulk action</option>
-                        <option value="1">Delete selected</option>
-                        <option value="2">Bulk edit</option>
-                        <option value="3">Export</option>
-                    </select>
-                    <button class="btn btn-sm btn-default">Apply</button>
+
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -21,7 +15,7 @@
                     <div class="input-group">
                         <input type="text" class="input-sm form-control" placeholder="Search">
                         <span class="input-group-btn">
-                            <button class="btn btn-sm btn-default" type="button">Go!</button>
+                            <button class="btn btn-sm btn-default" type="button">Tìm kiếm</button>
                         </span>
                     </div>
                 </div>
@@ -30,19 +24,18 @@
                 <table class="table table-striped b-t b-light">
                     <thead>
                         <tr>
-                            <th style="width:20px;">
-                                <label class="i-checks m-b-none">
-                                    <input type="checkbox"><i></i>
-                                </label>
+                            <th>
+                                STT
                             </th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Hình ảnh</th>
-                            <th>Danh mục</th>
-                            <th>Thương hiệu</th>
-                            <th>Nội dung</th>
-                            <th>Mô tả</th>
-                            <th>Hiển thị</th>
+                            <th>QTY</th>
+                            <th nowrap>Tên sản phẩm</th>
+                            <th nowrap>Giá</th>
+                            <th nowrap>Hình ảnh</th>
+                            <th nowrap>Danh mục</th>
+                            <th nowrap>Thương hiệu</th>
+                            <th nowrap>Nội dung</th>
+                            <th nowrap>Mô tả</th>
+                            <th nowrap>Hiển thị</th>
                             <th style="width:30px;">Sửa/Xóa</th>
                         </tr>
                         <?php
@@ -51,22 +44,57 @@
                             echo '<span class="text-alert">' . $message . '</span>';
                             Session::put('message', null);
                         }
+                        $i = 0;
                         ?>
                     </thead>
                     <tbody>
                         @foreach ($all_product as $key => $product)
+                            <?php
+                            $i++;
+                            ?>
                             <tr>
-                                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
+                                <td>
+                                    {{ $i }}
                                 </td>
+                                <td>{{ $product->product_quantity }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ number_format($product->product_price, 0, ',', '.') }}</td>
                                 <td><img src="public/uploads/product/{{ $product->product_image }}"
                                         alt="{{ 'Thumbnail sản phẩm' . ' ' . $product->product_name }}" height="100"
                                         width="100"></td>
-                                <td>{{ $product->category_name }}</td>
-                                <td>{{ $product->brand_name }}</td>
-                                <td>{{ $product->product_content }}</td>
-                                <td>{{ $product->product_desc }}</td>
+                                <td>
+                                    <p
+                                        style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-height: 60px;
+                        ">
+                                        {{ $product->category_name }}
+                                    </p>
+                                </td>
+                                <td>{{ $product->brand_name }}
+
+                                </td>
+                                <td>
+                                    <p
+                                        style="
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-height: 60px;
+                            ">
+                                        {{ $product->product_content }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p
+                                        style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-height: 60px;
+                        ">
+                                        {{ $product->product_desc }}
+                                    </p>
+                                </td>
                                 <td><span class="text-ellipsis">
                                         <?php
                                         if ($product->product_status == 1) {
@@ -103,7 +131,7 @@
                 <div class="row">
 
                     <div class="col-sm-5 text-center">
-                        <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+
                     </div>
                     <div class="col-sm-7 text-right text-center-xs">
                         <ul class="pagination pagination-sm m-t-none m-b-none">

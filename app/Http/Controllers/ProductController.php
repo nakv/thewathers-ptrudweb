@@ -73,12 +73,10 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string',
-            'product_price' => 'required|numeric',
+            'product_price' => 'required|integer',
             'product_desc' => 'required|string',
             'product_content' => 'required|string',
-            'category_id' => 'required|integer',
-            'brand_id' => 'required|integer',
-            'product_status' => 'required|integer',
+
         ]);
 
         if ($validator->fails()) {
@@ -94,7 +92,7 @@ class ProductController extends Controller
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
-
+        $data['product_quantity'] = 100;
         $get_img = $request->file('product_image');
         if ($get_img) {
             $get_img_name = $get_img->getClientOriginalName();
@@ -163,11 +161,10 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string',
+            'product_quantity' => 'required|integer',
             'product_price' => 'required|numeric',
             'product_desc' => 'required|string',
             'product_content' => 'required|string',
-            'category_id' => 'required|integer',
-            'brand_id' => 'required|integer',
             'product_status' => 'required|integer',
         ]);
 
@@ -184,6 +181,7 @@ class ProductController extends Controller
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
+        $data['product_quantity'] = $request->product_quantity;
         $get_img = $request->file('product_image');
         if ($get_img) {
             $get_img_name = $get_img->getClientOriginalName();

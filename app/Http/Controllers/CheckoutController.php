@@ -133,9 +133,11 @@ class CheckoutController extends Controller
 
     public function payment()
     {
+        $customer_id = Session::get('customer_id');
+        $order = Order::where('customer_id', $customer_id)->where('order_status', 2)->orWhere('order_status', 3)->orderby('created_at', 'DESC')->get();
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
-        return view('pages.checkout.payment')->with('category', $cate_product)->with('brand', $brand_product);
+        return view('pages.checkout.payment')->with(compact('order'))->with('category', $cate_product)->with('brand', $brand_product);
     }
 
     public function order_place(Request $request)
@@ -302,7 +304,7 @@ class CheckoutController extends Controller
         $order = new Order;
         $order->customer_id = Session::get('customer_id');
         $order->shipping_id =  $shipping_id;
-        $order->order_status =  "Đang chờ xác nhận";
+        $order->order_status = $shipping->payment_method;
         $order->order_code =    $checkout_code;
         $order->created_at =  now();
         $order->save();

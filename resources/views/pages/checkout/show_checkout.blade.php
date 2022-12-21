@@ -101,9 +101,6 @@
                                                             <li>Tổng tiền:
                                                                 <span>{{ number_format($vat + $total + $ship, 0, ',', '.') . ' VNĐ' }}</span>
                                                             </li>
-                                                            <a style="margin-left: 82%" class="btn btn-default check_out"
-                                                                href="{{ URL::to('/checkout') }}"> Thanh
-                                                                toán</a>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -207,7 +204,7 @@
                                             <option value="3">Thanh toán thẻ tín dụng</option>
                                         </select>
                                     </div>
-                                    <input type="button" value="Xác nhận đơn hàng" name="send_order"
+                                    <input type="button" value="Xác nhận đơn đặt hàng" name="send_order"
                                         class="btn btn-primary hover-style send_order" />
                                 </form>
                             </div>
