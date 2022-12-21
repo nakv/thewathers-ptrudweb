@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ use App\Models\Product;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Session\SessionBagProxy;
+use App\Http\Controllers\ProductController;
+use GuzzleHttp\Handler\Proxy;
 
 session_start();
 
@@ -314,10 +317,7 @@ class CheckoutController extends Controller
                 $detail->order_feeship = $data['order_fee'];
                 $detail->save();
 
-                $product = Product::find($cart['product_id']);
-                $product->product_quantity = $product->product_quantity - $cart['product_qty'];
-                $product->save();
-                DB::commit();
+                ProductController::reduceProduct($cart['product_id'], $cart['product_qty']);
             }
         }
 

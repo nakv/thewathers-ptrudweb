@@ -8,13 +8,21 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Product;
 
 session_start();
 
 class ProductController extends Controller
 {
+    public static function reduceProduct($id, $quantity)
+    {
+        $product = Product::find($id);
+        DB::table('tbl_product')->where('product_id', $id)->update([
+            'product_quantity' => $product->quantity - $quantity
+        ]);
+    }
     //Start Admin Page
-    
+
     /**
      * Check login
      */
