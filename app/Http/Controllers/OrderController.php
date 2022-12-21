@@ -10,6 +10,8 @@ use App\Models\OrderDetails;
 use App\Models\Feeship;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
+use App\Models\Product;
+use Illuminate\Support\Facades\Redirect;
 use PDO;
 
 session_start();
@@ -62,6 +64,14 @@ class OrderController extends Controller
 
         $od_details = OrderDetails::with('product')->where('order_code', $OrderCode)->get();
 
-        return view('pages.orders.my_order_detail')->with(compact('order', 'detail', 'shipping', 'od_details'))->with('category', $cate_product)->with('brand', $brand_product);
+        return view('pages.orders.my_order_detail')->with(compact('order', 'detail', 'shipping', 'od_details',))->with('category', $cate_product)->with('brand', $brand_product);
+    }
+    public function update_order_status($OrderCode, Request $request)
+    {
+
+        $status = $request->od_status;
+        Order::where('order_code', $OrderCode)->update(['order_status' => $status]);
+        $request->session()->put('message', 'Cập nhật trạng thái đơn hàng thành công');
+        return Redirect::to('/manage-order');
     }
 }

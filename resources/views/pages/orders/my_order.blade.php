@@ -46,32 +46,35 @@
                                 </td>
 
                                 {{-- Order Status --}}
-                                <td><a href="{{ URL::to('/my-order-detail/' . $od->order_code) }}">
-                                        <?php
-                                            switch ( $order->order_status) {
+                                <td>
+                                    <?php
+                                    switch ($od->order_status) {
                                         case 1:
-                                        echo 'Đang chờ xác nhận';
-                                        break;
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đang chờ xác nhận</a>';
+                                            break;
                                         case 2:
-                                        echo = 'Đang chờ thanh toán';
-                                        break;
+                                            echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
+                                            break;
                                         case 3:
-                                        echo 'Đang chờ thanh toán';
-                                        break;
+                                            echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
+                                            break;
                                         case 4:
-                                        echo 'Đã xác nhận, đang gói hàng';
-                                        break;
+                                            echo 'Đã xác nhận, đang gói hàng';
+                                            break;
                                         case 5:
-                                        echo 'Đã thanh toán, đang gói hàng';
-                                        break;
+                                            echo 'Đã thanh toán, đang gói hàng';
+                                            break;
                                         case 6:
-                                        echo 'Đang vận chuyển';
-                                        break;
+                                            echo 'Đang vận chuyển';
+                                            break;
+                                        case 7:
+                                            echo 'Đã nhận hàng';
+                                            break;
                                         default:
-                                        echo'Lỗi tình trạng';
-                                        }
+                                            echo 'Lỗi tình trạng';
+                                    }
                                     ?>
-                                    </a></td>
+                                </td>
                                 <td>{{ date('H:i:s d-m-Y', strtotime($od->created_at)) }}</td>
 
                                 <td>

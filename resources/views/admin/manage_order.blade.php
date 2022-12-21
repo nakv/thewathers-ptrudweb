@@ -33,17 +33,59 @@
                             <?php $stt++; ?>
 
                             <tr>
-                                <td><a href="{{ URL::to('/my-order-detail/' . $od->order_code) }}">{{ $stt }}</a>
+                                <td><a href="{{ URL::to('/view-order/' . $od->order_code) }}">{{ $stt }}</a>
                                 </td>
-                                <td><a href="{{ URL::to('/my-order-detail/' . $od->order_code) }}">{{ $od->order_code }}</a>
+                                <td><a href="{{ URL::to('/view-order/' . $od->order_code) }}">{{ $od->order_code }}</a>
                                 </td>
                                 <td>{{ $od->customer_id }}</td>
-                                <td>{{ $od->order_status }}</td>
+                                <td>
+                                    <div>
+                                        <form action="{{ URL::to('/update-order-status/' . $od->order_code) }}"
+                                            method="POST">
+                                            {{ csrf_field() }}
+                                            <select class="select-status" name="od_status">
+                                                @if ($od->order_status == 2 || $od->order_status == 3)
+                                                    <option <?php if ($od->order_status == 2 || $od->order_status == 3) {
+                                                        echo 'selected';
+                                                    } ?> value="2">Đang chờ thanh toán</option>
+                                                    <option <?php if ($od->order_status == 5) {
+                                                        echo 'selected';
+                                                    } ?> value="5">Đã thanh toán, đang gói hàng
+                                                    </option>
+                                                    <option <?php if ($od->order_status == 6) {
+                                                        echo 'selected';
+                                                    } ?> value="6">Đang vận chuyển</option>
+                                                    <option <?php if ($od->order_status == 7) {
+                                                        echo 'selected';
+                                                    } ?> value="7">Đã nhận hàng</option>
+                                                @else
+                                                    <option <?php if ($od->order_status == 1) {
+                                                        echo 'selected';
+                                                    } ?> value="1">Đang chờ xác nhận</option>
+
+                                                    <option <?php if ($od->order_status == 4) {
+                                                        echo 'selected';
+                                                    } ?> value="4">Đã xác nhận, đang gói hàng
+                                                    </option>
+                                                    <option <?php if ($od->order_status == 6) {
+                                                        echo 'selected';
+                                                    } ?> value="6">Đang vận chuyển</option>
+                                                    <option <?php if ($od->order_status == 7) {
+                                                        echo 'selected';
+                                                    } ?> value="7">Đã nhận hàng</option>
+                                                @endif
+                                            </select>
+
+                                            <input style="width: 70px" style="padding: 3px" type="submit" value="Cập nhật"
+                                                name="update_status" class="btn btn-default btn-sm update_status" />
+                                        </form>
+                                    </div>
+                                </td>
                                 <td>{{ date('H:i:s d-m-Y', strtotime($od->created_at)) }}</td>
                                 <td>
                                     <div class="edit-delete-button">
-                                        <a href="{{ URL::to('/view-order/' . $od->order_code) }}" class="active styling-edit "
-                                            class="edit-admin-button" ui-toggle-class="">
+                                        <a href="{{ URL::to('/view-order/' . $od->order_code) }}"
+                                            class="active styling-edit " class="edit-admin-button" ui-toggle-class="">
                                             <i class="fa fa-pencil-square-o text-info text-active">
                                             </i>
                                         </a>

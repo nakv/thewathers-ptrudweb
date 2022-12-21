@@ -193,9 +193,31 @@
                             </td>
 
                             <td nowrap>
-                                <h4>
-                                    {{ $order[0]->order_status }}
-                                </h4>
+
+                                <?php
+                                switch ($order[0]->order_status) {
+                                    case 1:
+                                        echo '<h4>Đang chờ xác nhận</h4>';
+                                        break;
+                                    case 2:
+                                        echo '<h4>Đang chờ thanh toán</h4>';
+                                        break;
+                                    case 3:
+                                        echo '<h4>Đang chờ thanh toán</h4>';
+                                        break;
+                                    case 4:
+                                        echo '<h4>Đã xác nhận, đang gói hàng</h4>';
+                                        break;
+                                    case 5:
+                                        echo '<h4>Đã thanh toán, đang gói hàng</h4>';
+                                        break;
+                                    case 6:
+                                        echo '<h4>Đang vận chuyển</h4>';
+                                        break;
+                                    default:
+                                        echo 'Lỗi tình trạng';
+                                }
+                                ?>
                             </td>
                         </tr>
                     </tbody>

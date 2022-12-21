@@ -35,7 +35,35 @@
                     <tbody>
                         <tr>
 
-                            <td>{{ $order->order_status }}</td>
+                            <td>
+                                <?php
+                                switch ($order->order_status) {
+                                    case 1:
+                                        echo '<p>Đang chờ xác nhận</p>';
+                                        break;
+                                    case 2:
+                                        echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
+                                        break;
+                                    case 3:
+                                        echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
+                                        break;
+                                    case 4:
+                                        echo 'Đã xác nhận, đang gói hàng';
+                                        break;
+                                    case 5:
+                                        echo 'Đã thanh toán, đang gói hàng';
+                                        break;
+                                    case 6:
+                                        echo 'Đang vận chuyển';
+                                        break;
+                                    case 7:
+                                        echo 'Đã nhận hàng';
+                                        break;
+                                    default:
+                                        echo 'Lỗi tình trạng';
+                                }
+                                ?>
+                            </td>
                             <td><?php
                             if ($shipping->payment_method == 1) {
                                 echo 'Thanh toán khi nhận hàng (COD)';
@@ -76,7 +104,6 @@
                                         <td>{{ $shipping->shipping_name }}</td>
                                         <td>{{ $shipping->shipping_address . ', ' . $shipping->addressdelivery }}</td>
                                         <td>{{ $shipping->shipping_phone }}</td>
-
                                         <td>{{ $shipping->shipping_note }}</td>
                                     </tr>
                                 </tbody>
@@ -98,6 +125,7 @@
                                     <tr>
 
                                         <th nowrap>STT: </th>
+                                        {{-- <th nowrap>Ảnh </th> --}}
                                         <th>Tên sản phẩm: </th>
                                         <th>Số lượng: </th>
                                         <th>Đơn giá: </th>
@@ -131,7 +159,9 @@
                                         ?>
                                         <tr>
                                             <td>{{ $i }}</td>
-                                            </td>
+                                            {{-- <td><img src=" 'public/uploads/product/'{{ $img[$id]->image }}"
+                                                        alt="{{ 'Thumbnail sản phẩm' . ' ' . $pro->product_name }}"
+                                                        height="100" width="100"></td> --}}
                                             <td>
                                                 <p>{{ $pro->product_name }}</p>
                                             </td>
