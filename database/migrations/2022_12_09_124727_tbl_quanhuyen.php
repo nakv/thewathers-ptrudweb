@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tbl_quanhuyen', function (Blueprint $table) {
             $table->bigIncrements('maqh');
             $table->string('name_qh');
+            $table->string('type');
             $table->unsignedBigInteger('matp');
             $table->foreign('matp')->references('matp')->on('tbl_tinhthanhpho');
             $table->timestamps();

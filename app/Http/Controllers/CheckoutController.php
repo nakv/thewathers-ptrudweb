@@ -280,9 +280,8 @@ class CheckoutController extends Controller
         $validator = Validator::make($data, [
             'shipping_name' => 'required|string|max:255',
             'shipping_email' => 'required|email',
-            'shipping_phone' => 'required|+:10',
+            'shipping_phone' => 'required|digits:10',
             'shipping_address' => 'required',
-            'shipping_note' => 'required',
             'payment_select' => 'required',
         ]);
 
@@ -319,8 +318,8 @@ class CheckoutController extends Controller
                 $detail->product_price =  $cart['product_price'];
                 $detail->product_sales_quantity = $cart['product_qty'];
                 $detail->order_feeship = $data['order_fee'];
+                $detail->order_id = $order->order_id;
                 $detail->save();
-
                 ProductController::reduceProduct($cart['product_id'], $cart['product_qty']);
             }
         }

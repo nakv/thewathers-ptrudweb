@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tbl_tinhthanhpho', function (Blueprint $table) {
             $table->bigIncrements('matp');
             $table->string('name_city');
+            $table->string('type');
             $table->timestamps();
         });
     }

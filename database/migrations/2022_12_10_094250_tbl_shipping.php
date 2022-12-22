@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('tbl_shipping', function (Blueprint $table) {
             $table->bigIncrements('shipping_id');
             $table->string('shipping_name');
-            $table->unsignedBigInteger('customer_id');
             $table->string('shipping_address');
+            $table->string('addressdelivery');
             $table->string('shipping_phone');
             $table->string('shipping_email');
-            $table->foreign('customer_id')->references('customer_id')->on('tbl_customers');
+            $table->string('shipping_note')->nullable();
+            $table->integer('payment_method');
             $table->timestamps();
         });
     }
