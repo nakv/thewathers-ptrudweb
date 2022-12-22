@@ -137,8 +137,8 @@ class BrandProduct extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         $brand_by_id = DB::table('tbl_product')
             ->join('tbl_brand', 'tbl_product.brand_id', '=', 'tbl_brand.brand_id')
-            ->where('tbl_product.brand_id', $brand_id)->get();
-        $brand_name = DB::table('tbl_brand')->where('tbl_brand.brand_id', $brand_id)->limit(1)->get();
+            ->where('tbl_product.brand_id', $brand_id)->where('tbl_product.product_status', '1')->get();
+        $brand_name = DB::table('tbl_brand')->where('tbl_brand.brand_id', $brand_id)->get();
         return view('pages.brand.show_brand')->with('category', $cate_product)->with('brand', $brand_product)->with('brand_by_id', $brand_by_id)->with('brand_name', $brand_name);
     }
 }

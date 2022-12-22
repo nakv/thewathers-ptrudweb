@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
-
+use App\Models\Category;
+use App\Models\Brand;
 // session_start();
 
 class ProductController extends Controller
@@ -54,7 +55,7 @@ class ProductController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        $all_product = Product::orderby('product_id', 'desc')->paginate(5);
+        $all_product = Product::orderby('product_id', 'desc')->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl_product.category_id')->join('tbl_brand', 'tbl_brand.brand_id', '=', 'tbl_product.brand_id')->paginate(5);
         return view('admin.all_product', compact('all_product'));
     }
 
@@ -69,7 +70,7 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string',
-            'product_price' => 'required|integer',
+            'product_price' => 'required',
             'product_desc' => 'required|string',
             'product_content' => 'required|string',
 
@@ -82,7 +83,7 @@ class ProductController extends Controller
 
         $data = [];
         $data['product_name'] = $request->product_name;
-        $data['product_price'] = $request->product_price;
+        $data['product_price'] = str_replace('.', '', $request->product_price);
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -98,13 +99,13 @@ class ProductController extends Controller
             $data['product_image'] = $new_img;
             DB::table('tbl_product')->insert($data);
             $request->session()->put('message', 'Thêm sản phẩm thành công');
-            return Redirect::to('all-product');
+            return redirect()->back();
         }
 
         $data['product_image'] = '';
         DB::table('tbl_product')->insert($data);
         $request->session()->put('message', 'Thêm sản phẩm thành công');
-        return Redirect::to('all-product');
+        return redirect()->back();
     }
 
     /**

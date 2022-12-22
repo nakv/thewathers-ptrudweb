@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         $cate_product = DB::table('tbl_category_product')->where('category_status', '1')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
-        $all_product = Product::where('product_status', '1')->orderBy('product_id', 'desc')->paginate(1);
+        $all_product = Product::where('product_status', '1')->orderBy('product_id', 'desc')->paginate(9);
         return view('pages.home', compact('all_product'))->with('category', $cate_product)->with('brand', $brand_product);
     }
 

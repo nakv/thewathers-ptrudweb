@@ -33,8 +33,6 @@
                             <th nowrap>Hình ảnh</th>
                             <th nowrap>Danh mục</th>
                             <th nowrap>Thương hiệu</th>
-                            <th nowrap>Nội dung</th>
-                            <th nowrap>Mô tả</th>
                             <th nowrap>Hiển thị</th>
                             <th style="width:30px;">Sửa/Xóa</th>
                         </tr>
@@ -63,38 +61,14 @@
                                         alt="{{ 'Thumbnail sản phẩm' . ' ' . $product->product_name }}" height="100"
                                         width="100"></td>
                                 <td>
-                                    <p
-                                        style="
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        max-height: 60px;
-                        ">
-                                        {{ $product->category_name }}
-                                    </p>
+
+                                    {{ $product->category_name }}
+
                                 </td>
                                 <td>{{ $product->brand_name }}
 
                                 </td>
-                                <td>
-                                    <p
-                                        style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            max-height: 60px;
-                            ">
-                                        {{ $product->product_content }}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p
-                                        style="
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        max-height: 60px;
-                        ">
-                                        {{ $product->product_desc }}
-                                    </p>
-                                </td>
+
                                 <td><span class="text-ellipsis">
                                         <?php
                                         if ($product->product_status == 1) {

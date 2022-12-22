@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
     <div class="features_items">
-        <h2 class="title text-center" style="margin-top:5px">Sản phẩm mới nhất</h2>
+        <h2 class="title text-center" style="margin-top:5px">Tất cả sản phẩm</h2>
         @foreach ($all_product as $key => $product)
             <div class="col-sm-4">
                 <div class="product-image-wrapper">
@@ -44,4 +44,7 @@
             </div>
         @endforeach
     </div>
+    @if ($all_product)
+        <div style="margin-left: 50%"> {{ $all_product->links() }}</div>
+    @endif
 @endsection

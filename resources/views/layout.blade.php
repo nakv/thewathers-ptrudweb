@@ -254,7 +254,6 @@
 
                     @yield('content')
 
-                    <div style="margin-left: 50%"> {{ $all_product->links() }}</div>
                 </div>
 
             </div>
