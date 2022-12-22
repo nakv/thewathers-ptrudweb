@@ -45,8 +45,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <input type="email" class="ggg" name="admin_email" placeholder="Nhập Email"
                     value="{{ old('admin_email') }}"required>
                 <label for="phone">Điện thoại</label>
-                <input type="text" class="ggg" name="phone" placeholder="Nhập SĐT"
-                    value="{{ old('phone') }}"required>
+                <input type="text" class="ggg" name="admin_phone" placeholder="Nhập SĐT"
+                    value="{{ old('admin_phone') }}"required>
                 <label for="admin_password">Mật khẩu</label>
                 <input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required>
                 <div class="clearfix"></div>

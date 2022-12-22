@@ -33,7 +33,23 @@ class UserSeeder extends Seeder
                 'admin_password' => md5('12345678'),
             ]
         );
-        Admin::create(
+        $sale = Admin::create(
+            [
+                'admin_name' => 'Anh Khoa Sale',
+                'admin_email' => 'anhkhoasale@gmail.com',
+                'admin_phone' => '2914139767',
+                'admin_password' => md5('12345678'),
+            ]
+        );
+        $content = Admin::create(
+            [
+                'admin_name' => 'Anh Khoa content',
+                'admin_email' => 'anhkhoacontent@gmail.com',
+                'admin_phone' => '2914139767',
+                'admin_password' => md5('12345678'),
+            ]
+        );
+        $user = Admin::create(
             [
                 'admin_name' => 'Anh Khoa user',
                 'admin_email' => 'anhkhoauser@gmail.com',
