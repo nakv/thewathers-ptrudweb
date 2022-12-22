@@ -139,3 +139,7 @@ Route::get('add-users', 'App\Http\Controllers\UserController@add_users');
 Route::post('store-users', 'App\Http\Controllers\UserController@store_users');
 
 Route::post('assign-roles', 'App\Http\Controllers\UserController@assign_roles');
+
+//WEBSITE INFO ROUTES
+Route::get('/contact-us', 'App\Http\Controllers\HomeController@contactus');
+Route::get('/about-us', 'App\Http\Controllers\HomeController@aboutus');

@@ -37,4 +37,12 @@ class HomeController extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status', '1')->orderby('brand_id', 'desc')->get();
         return view('pages.product.search')->with('category', $cate_product)->with('brand', $brand_product)->with('search_product', $search_product);
     }
+    public function contactus()
+    {
+        return view('pages.info.contactus');
+    }
+    public function aboutus()
+    {
+        return view('pages.info.aboutus');
+    }
 }
