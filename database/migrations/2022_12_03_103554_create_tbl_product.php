@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('product_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
+            $table->string('product_name');
             $table->text('product_desc');
             $table->text('product_content');
             $table->string('product_price');

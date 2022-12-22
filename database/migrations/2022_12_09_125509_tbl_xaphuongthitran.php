@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_roles', function (Blueprint $table) {
-            $table->increments('id_role');
-            $table->string('name_role');
+        Schema::create('tbl_xaphuongthitran', function (Blueprint $table) {
+            $table->bigIncrements('xaid');
+            $table->string('name_xa');
+            $table->string('type');
+            $table->unsignedBigInteger('maqh');
+            $table->foreign('maqh')->references('maqh')->on('tbl_quanhuyen');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_roles');
+        Schema::dropIfExists('tbl_xaphuongthitran');
     }
 };
