@@ -286,7 +286,7 @@ class CheckoutController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $request->session->put('masseage', 'Vui lòng nhập đầy đủ thông tin');
+            Session::put('masseage', 'Vui lòng nhập đầy đủ thông tin');
             return Redirect::back()->withErrors($validator)->withInput();
         }
 

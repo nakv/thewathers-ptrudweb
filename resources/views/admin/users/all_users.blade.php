@@ -7,23 +7,12 @@
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
-                    <select class="input-sm form-control w-sm inline v-middle">
-                        <option value="0">Bulk action</option>
-                        <option value="1">Delete selected</option>
-                        <option value="2">Bulk edit</option>
-                        <option value="3">Export</option>
-                    </select>
-                    <button class="btn btn-sm btn-default">Apply</button>
+
                 </div>
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-3">
-                    <div class="input-group">
-                        <input type="text" class="input-sm form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-sm btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
+
                 </div>
             </div>
             <div class="table-responsive">
@@ -47,8 +36,8 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Password</th>
-                            <th>Author</th>
                             <th>Admin</th>
+                            <th>Manager</th>
                             <th>User</th>
 
                             <th style="width:30px;"></th>
@@ -59,7 +48,6 @@
                             <form action="{{ url('/assign-roles') }}" method="POST">
                                 @csrf
                                 <tr>
-
                                     <td><label class="i-checks m-b-none"><input type="checkbox"
                                                 name="post[]"><i></i></label></td>
                                     <td>{{ $user->admin_name }}</td>
@@ -68,24 +56,17 @@
                                     </td>
                                     <td>{{ $user->admin_phone }}</td>
                                     <td>{{ $user->admin_password }}</td>
-                                    <td><input type="checkbox" name="sale_role"
-                                            {{ $user->hasRole('sale') ? 'checked' : '' }}></td>
 
                                     <td><input type="checkbox" name="admin_role"
                                             {{ $user->hasRole('admin') ? 'checked' : '' }}></td>
 
-                                    <td><input type="checkbox" name="user_role"
-                                            {{ $user->hasRole('user') ? 'checked' : '' }}></td>
-
                                     <td><input type="checkbox" name="manager_role"
                                             {{ $user->hasRole('manager') ? 'checked' : '' }}></td>
 
-                                    <td><input type="checkbox" name="content_role"
-                                            {{ $user->hasRole('content') ? 'checked' : '' }}></td>
-
+                                    <td><input type="checkbox" name="user_role"
+                                            {{ $user->hasRole('user') ? 'checked' : '' }}></td>
 
                                     <td>
-
 
                                         <input type="submit" value="Assign roles" class="btn btn-sm btn-default">
 

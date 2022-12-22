@@ -171,13 +171,13 @@
                                     {{ csrf_field() }}
                                     <label for="shipping_name">Họ và tên người nhận hàng</label>
                                     <input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên"
-                                        required>
+                                        required value="{{ old('shipping_name') }}">
                                     <label for="shipping_phone">Số điện thoại nhận hàng</label>
                                     <input type="text" name="shipping_phone" class="shipping_phone"
-                                        placeholder="Số điện thoại" required>
+                                        placeholder="Số điện thoại" required value="{{ old('shipping_phone') }}">
                                     <label for="shipping_email">Email đặt đơn hàng</label>
                                     <input type="email" placeholder="Email" name="shipping_email" class="shipping_email"
-                                        required>
+                                        required value="{{ old('shipping_email') }}">
                                     <label for="addressdelivery">Tỉnh/Tp, Quận/Huyện, Xã/Phường/Thị trấn</label>
 
                                     @if (Session::get('address_delivery'))
@@ -192,9 +192,11 @@
                                         value="{{ $ship }}">
                                     <label for="shipping_address">Địa chỉ nhận hàng chi tiết</label>
                                     <input type="text" name="shipping_address"
-                                        class="shipping_address"placeholder="Ghi rõ số đường, số nhà" required>
+                                        class="shipping_address"placeholder="Ghi rõ số đường, số nhà" required
+                                        value="{{ old('shipping_address') }}">
                                     <label for="shipping_note">Ghi chú đơn hàng</label>
-                                    <textarea name="shipping_note" class="shipping_note" placeholder="Ghi chú" rows="4"></textarea>
+                                    <textarea name="shipping_note" class="shipping_note" placeholder="Ghi chú" rows="4"
+                                        value="{{ old('shipping_note') }}"></textarea>
                                     <div class="form-group">
                                         <label for="payment_select">Hình thức thanh toán</label>
                                         <select name="payment_select" class="payment_select" id="" required>

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Admin;
-use Closure;
+use Mockery\Matcher\Closure;
 use Illuminate\Support\Facades\Route;
 
 class AccessAdmin

@@ -52,8 +52,9 @@ class Admin extends Authenticatable
     {
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
-    public function hasRoles($roles)
+    public function hasRole($role)
     {
-        return null !== $this->roles()->where('name', $roles)->first();
+        if ($this->roles()->where('name', $role)->first())
+            return null;
     }
 }

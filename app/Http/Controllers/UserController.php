@@ -30,21 +30,17 @@ class UserController extends Controller
         $data = $request->all();
         $user = Admin::where('admin_email', $data['admin_email'])->first();
         $user->roles()->detach();
-        if ($request['sale_role']) {
-            $user->roles()->attach(Roles::where('name', 'sale')->first());
-        }
-        if ($request['user_role']) {
-            $user->roles()->attach(Roles::where('name', 'user')->first());
-        }
-        if ($request['admin_role']) {
+
+        if ($request->admin_role) {
             $user->roles()->attach(Roles::where('name', 'admin')->first());
         }
-        if ($request['manager_role']) {
+        if ($request->manager_role) {
             $user->roles()->attach(Roles::where('name', 'manager')->first());
         }
-        if ($request['content_role']) {
-            $user->roles()->attach(Roles::where('content', 'admin')->first());
+        if ($request->user_role) {
+            $user->roles()->attach(Roles::where('name', 'user')->first());
         }
+
         return redirect()->back();
     }
     public function store_users(Request $request)

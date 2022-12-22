@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Brand;
 
 session_start();
 
@@ -22,20 +23,19 @@ class BrandProduct extends Controller
             return Redirect::to('admin')->send();
         }
     }
-
+    public function index()
+    {
+        $this->AuthLogin();
+        $all_brand_product = Brand::orderBy('brand_id')->paginate(8);
+        return view('admin.all_brand_product', compact('all_brand_product'));
+    }
     public function add_brand_product()
     {
         $this->AuthLogin();
         return view('admin.add_brand_product');
     }
 
-    public function all_brand_product()
-    {
-        $this->AuthLogin();
-        $all_brand_product = DB::table('tbl_brand')->get();
-        $manager_brand_product = view('admin.all_brand_product')->with('all_brand_product', $all_brand_product);
-        return view('admin_layout')->with('admin.all_brand_product', $manager_brand_product);
-    }
+
 
     public function save_brand_product(Request $request)
     {

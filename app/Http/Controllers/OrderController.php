@@ -38,9 +38,9 @@ class OrderController extends Controller
         return view('admin.view_order')->with(compact('order', 'detail', 'customer', 'shipping', 'od_details'));
     }
 
-    public function manage_order()
+    public function index()
     {
-        $order = Order::orderby('created_at', 'DESC')->get();
+        $order = Order::orderby('created_at', 'DESC')->paginate(10);
         return view('admin.manage_order')->with(compact('order'));
     }
     //USER ORDERS

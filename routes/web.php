@@ -38,7 +38,7 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/logout-auth', 'App\Http\Controllers\AuthController@logout_auth');
 
 // Category Product
-Route::get('/all-category-product', 'App\Http\Controllers\CategoryProduct@all_category_product');
+Route::get('/all-category-product', 'App\Http\Controllers\CategoryProduct@index');
 Route::get('/add-category-product', 'App\Http\Controllers\CategoryProduct@add_category_product');
 
 Route::get('/edit-category-product/{category_id}', 'App\Http\Controllers\CategoryProduct@edit_category_product');
@@ -51,7 +51,7 @@ Route::post('/save-category-product', 'App\Http\Controllers\CategoryProduct@save
 Route::post('/update-category-product/{category_id}', 'App\Http\Controllers\CategoryProduct@update_category_product');
 
 //Brand
-Route::get('/all-brand-product', 'App\Http\Controllers\BrandProduct@all_brand_product');
+Route::get('/all-brand-product', 'App\Http\Controllers\BrandProduct@index');
 Route::get('/add-brand-product', 'App\Http\Controllers\BrandProduct@add_brand_product');
 
 Route::get('/edit-brand-product/{brand_id}', 'App\Http\Controllers\BrandProduct@edit_brand_product');
@@ -65,7 +65,7 @@ Route::post('/update-brand-product/{brand_id}', 'App\Http\Controllers\BrandProdu
 
 
 // Product
-Route::get('/all-product', 'App\Http\Controllers\ProductController@all_product');
+Route::get('/all-product', 'App\Http\Controllers\ProductController@index');
 Route::get('/add-product', 'App\Http\Controllers\ProductController@add_product');
 
 Route::get('/edit-product/{product_id}', 'App\Http\Controllers\ProductController@edit_product');
@@ -110,7 +110,7 @@ Route::get('/del-fee', 'App\Http\Controllers\CheckoutController@del_fee');
 Route::post('/confirm-order', 'App\Http\Controllers\CheckoutController@confirm_order');
 //Amin Order management
 
-Route::get('/manage-order', 'App\Http\Controllers\OrderController@manage_order');
+Route::get('/manage-order', 'App\Http\Controllers\OrderController@index');
 Route::get('/view-order/{OrderCode}', 'App\Http\Controllers\OrderController@view_order');
 Route::get('/delete-order/{OrderCode}', 'App\Http\Controllers\OrderController@delete_order');
 
@@ -137,4 +137,5 @@ Route::post('/update-feeship', 'App\Http\Controllers\DeliveryController@update_f
 Route::get('users', 'App\Http\Controllers\UserController@index');
 Route::get('add-users', 'App\Http\Controllers\UserController@add_users');
 Route::post('store-users', 'App\Http\Controllers\UserController@store_users');
+
 Route::post('assign-roles', 'App\Http\Controllers\UserController@assign_roles');
