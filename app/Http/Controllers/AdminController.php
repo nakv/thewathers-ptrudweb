@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 session_start();
 
@@ -14,7 +15,7 @@ class AdminController extends Controller
 {
     public function AuthLogin()
     {
-        $admin_id = Session()->get('admin_id');
+        $admin_id  = Auth::id();
         if ($admin_id) {
             return Redirect::to('dashboard');
         } else {
@@ -37,8 +38,8 @@ class AdminController extends Controller
     {
         $this->AuthLogin();
         $admin_email = $request->admin_email;
-        $admin_password = $request->admin_password;
-        // $admin_password = md5($request->admin_password);
+        // $admin_password = $request->admin_password;
+        $admin_password = md5($request->admin_password);
         $result = DB::table('tbl_admin')->where('admin_email', $admin_email)->where('admin_password', $admin_password)->first();
         if ($result) {
             $request->session()->put('admin_name', $result->admin_name);
@@ -49,7 +50,7 @@ class AdminController extends Controller
             return Redirect::to('/admin');
         }
     }
-    
+
     public function logout()
     {
         $this->AuthLogin();

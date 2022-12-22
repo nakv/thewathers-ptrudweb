@@ -33,6 +33,9 @@ Route::post('/admin-dashboard', 'App\Http\Controllers\AdminController@dashboard'
 //ADMIN Auth role
 Route::get('/register-auth', 'App\Http\Controllers\AuthController@register_auth');
 Route::post('/register', 'App\Http\Controllers\AuthController@register');
+Route::get('/login-auth', 'App\Http\Controllers\AuthController@login_auth');
+Route::post('/login', 'App\Http\Controllers\AuthController@login');
+Route::get('/logout-auth', 'App\Http\Controllers\AuthController@logout_auth');
 
 // Category Product
 Route::get('/all-category-product', 'App\Http\Controllers\CategoryProduct@all_category_product');
@@ -128,3 +131,10 @@ Route::post('/select-delivery', 'App\Http\Controllers\DeliveryController@select_
 Route::post('/insert-delivery', 'App\Http\Controllers\DeliveryController@insert_delivery');
 Route::post('/select-feeship', 'App\Http\Controllers\DeliveryController@select_feeship');
 Route::post('/update-feeship', 'App\Http\Controllers\DeliveryController@update_feeship');
+
+
+//USER manager
+Route::get('users', 'App\Http\Controllers\UserController@index');
+Route::get('add-users', 'App\Http\Controllers\UserController@add_users');
+Route::post('store-users', 'App\Http\Controllers\UserController@store_users');
+Route::post('assign-roles', 'App\Http\Controllers\UserController@assign_roles');

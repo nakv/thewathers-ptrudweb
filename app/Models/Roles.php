@@ -11,10 +11,10 @@ class Roles extends Model
     protected $fillable = [
         'name'
     ];
-    protected $primayKey = 'id_role';
+    protected $primayKey = 'id_roles';
     protected $table = 'tbl_roles';
     public function admin()
     {
-        return $this->belongsToMany('App\Model\Admin');
+        return $this->belongsToMany(Admin::class);
     }
 }

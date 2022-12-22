@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_admin_roles', function (Blueprint $table) {
-            $table->bigIncrements('id_admin_role');
+        Schema::create('admin_roles', function (Blueprint $table) {
+            $table->bigIncrements('id_admin_roles');
             $table->unsignedBigInteger('admin_admin_id');
-            $table->unsignedBigInteger('role_id_role');
+            $table->unsignedBigInteger('roles_id_roles');
             $table->foreign('admin_admin_id')->references('admin_id')->on('tbl_admin');
-            $table->foreign('role_id_role')->references('id_role')->on('tbl_roles');
+            $table->foreign('roles_id_roles')->references('id_roles')->on('tbl_roles');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_admin_roles');
+        Schema::dropIfExists('admin_roles');
     }
 };

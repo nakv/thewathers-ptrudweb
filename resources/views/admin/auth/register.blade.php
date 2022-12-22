@@ -50,8 +50,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <label for="admin_password">Mật khẩu</label>
                 <input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required>
                 <div class="clearfix"></div>
-                <input type="submit" value="Đăng ký" name="login">
+                <input type="submit" value="Đăng ký" name="register">
             </form>
+            <p> <a href="{{ url('/register-auth') }}">Đăng ký Auth</a>|
+                <a href="{{ url('/login-auth') }}">Đăng nhập Auth</a>
+            </p>
         </div>
     </div>
     <script src="{{ asset('public/backend/js/bootstrap.js') }}"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Trang quản lý Admin</title>
+    <title>Đăng nhập Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords"
@@ -28,7 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <div class="log-w3">
         <div class="w3layouts-main">
-            <h2>Đăng nhập ngay</h2>
+            <h2>Đăng nhập tài khoản Admin xác thực</h2>
             <?php
             $message = Session::get('message');
             if ($message) {
@@ -36,22 +36,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 Session::put('message', null);
             }
             ?>
-            <form action="{{ URL::to('/admin-dashboard') }}" method="post">
+            <form action="{{ URL::to('/login') }}" method="post">
                 {{ csrf_field() }}
-                <label for="email">Email</label>
-                <input type="email" class="ggg" name="admin_email" placeholder="Nhập Email" required>
-                <label for="password">Mật khẩu</label>
+                <input type="email" class="ggg" name="admin_email" placeholder="Nhập Email"
+                    value="{{ old('admin_email') }}"required>
+                <label for="admin_password">Mật khẩu</label>
                 <input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required>
-                <span><input type="checkbox" />Lưu đăng nhập</span>
-                <h6><a href="#">Quên mật khẩu?</a></h6>
                 <div class="clearfix"></div>
                 <input type="submit" value="Đăng nhập" name="login">
-
             </form>
-
-            <p>Hoặc <a href="{{ url('/login-auth') }}">Đăng nhập Auth</a></p>
-            <p>Chưa có tài khoản? <a href="{{ url('/register-auth') }}">Đăng ký Auth</a>|
-
+            <p> <a href="{{ url('/register-auth') }}">Đăng ký Auth</a>|
             </p>
         </div>
     </div>
