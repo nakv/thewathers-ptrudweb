@@ -57,7 +57,16 @@
                                 </li>
 
                                 <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart"></i> Giỏ
-                                        hàng</a></li>
+                                        hàng
+                                        <?php
+                                        $i = 0;
+                                        if (Session::get('cart')) {
+                                            foreach (Session::get('cart') as $key => $cart) {
+                                                $i++;
+                                            }
+                                            echo '<span class="badge badge-light">' . $i . '</span>';
+                                        }
+                                        ?></a></li>
                                 <li>
                                     <a href="{{ URL::to('/my-order') }}">
                                         <i class="fa fa-list" aria-hidden="true"></i>Đơn hàng

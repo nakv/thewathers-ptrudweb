@@ -44,21 +44,43 @@
                                             method="POST">
                                             {{ csrf_field() }}
                                             <select class="select-status" name="od_status">
-                                                @if ($od->order_status == 2 || $od->order_status == 3)
+                                                @if ($od->order_status == 2 ||
+                                                    $od->order_status == 3 ||
+                                                    $od->order_status == 10 ||
+                                                    $od->order_status == 11 ||
+                                                    $od->order_status == 12 ||
+                                                    $od->order_status == 13 ||
+                                                    $od->order_status == 14)
                                                     <option <?php if ($od->order_status == 2 || $od->order_status == 3) {
                                                         echo 'selected';
                                                     } ?> value="2">Đang chờ thanh toán</option>
-                                                    <option <?php if ($od->order_status == 5) {
+
+                                                    <option <?php if ($od->order_status == 10) {
                                                         echo 'selected';
-                                                    } ?> value="5">Đã thanh toán, đang gói hàng
+                                                    } ?> value="10">Đã thanh toán, đang gói hàng
                                                     </option>
-                                                    <option <?php if ($od->order_status == 6) {
+
+                                                    <option <?php if ($od->order_status == 11) {
                                                         echo 'selected';
-                                                    } ?> value="6">Đang vận chuyển</option>
-                                                    <option <?php if ($od->order_status == 7) {
+                                                    } ?> value="11">Đang vận chuyển</option>
+
+                                                    <option <?php if ($od->order_status == 12) {
                                                         echo 'selected';
-                                                    } ?> value="7">Đã nhận hàng</option>
-                                                @else
+                                                    } ?> value="12">Đã nhận hàng</option>
+
+                                                    <option <?php if ($od->order_status == 13) {
+                                                        echo 'selected';
+                                                    } ?> value="13">Đã hủy đơn.</option>
+
+                                                    <option <?php if ($od->order_status == 14) {
+                                                        echo 'selected';
+                                                    } ?> value="14">Đơn không hợp lệ.</option>
+                                                @elseif($od->order_status == 1 ||
+                                                    $od->order_status == 4 ||
+                                                    $od->order_status == 5 ||
+                                                    $od->order_status == 6 ||
+                                                    $od->order_status == 7 ||
+                                                    $od->order_status == 8)
                                                     <option <?php if ($od->order_status == 1) {
                                                         echo 'selected';
                                                     } ?> value="1">Đang chờ xác nhận</option>
@@ -67,12 +89,18 @@
                                                         echo 'selected';
                                                     } ?> value="4">Đã xác nhận, đang gói hàng
                                                     </option>
+                                                    <option <?php if ($od->order_status == 5) {
+                                                        echo 'selected';
+                                                    } ?> value="5">Đang vận chuyển</option>
                                                     <option <?php if ($od->order_status == 6) {
                                                         echo 'selected';
-                                                    } ?> value="6">Đang vận chuyển</option>
+                                                    } ?> value="6">Đã nhận hàng</option>
                                                     <option <?php if ($od->order_status == 7) {
                                                         echo 'selected';
-                                                    } ?> value="7">Đã nhận hàng</option>
+                                                    } ?> value="7">Đã hủy đơn</option>
+                                                    <option <?php if ($od->order_status == 8) {
+                                                        echo 'selected';
+                                                    } ?> value="8">Đã không hợp lệ</option>
                                                 @endif
                                             </select>
 

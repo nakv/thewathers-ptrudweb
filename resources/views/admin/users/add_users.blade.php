@@ -16,7 +16,7 @@
                 <div class="panel-body">
 
                     <div class="position-center">
-                        <form role="form" action="{{ URL::to('store-users') }}" method="post">
+                        <form role="form" action="{{ URL::to('/store-users') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên users</label>
@@ -30,6 +30,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
+                                <input type="text" name="admin_phone" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Slug">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Role</label>
                                 <input type="text" name="admin_phone" class="form-control" id="exampleInputEmail1"
                                     placeholder="Slug">
                             </div>

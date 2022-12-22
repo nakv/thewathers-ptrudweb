@@ -53,22 +53,30 @@
                                             echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đang chờ xác nhận</a>';
                                             break;
                                         case 2:
-                                            echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
-                                            break;
                                         case 3:
                                             echo '<a href="' . url::to('/payment') . '">Đang chờ thanh toán</a>';
                                             break;
                                         case 4:
-                                            echo 'Đã xác nhận, đang gói hàng';
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đã xác nhận, đang gói hàng</a>';
+                                            break;
+                                        case 10:
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đã thanh toán, đang gói hàng</a>';
                                             break;
                                         case 5:
-                                            echo 'Đã thanh toán, đang gói hàng';
+                                        case 11:
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đang vận chuyển</a>';
                                             break;
                                         case 6:
-                                            echo 'Đang vận chuyển';
+                                        case 12:
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đã nhận hàng</a>';
                                             break;
                                         case 7:
-                                            echo 'Đã nhận hàng';
+                                        case 13:
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đã hủy đơn</a>';
+                                            break;
+                                        case 8:
+                                        case 14:
+                                            echo '<a href="' . url::to('/my-order-detail/' . $od->order_code) . '">Đơn không hợp lệ</a>';
                                             break;
                                         default:
                                             echo 'Lỗi tình trạng';
