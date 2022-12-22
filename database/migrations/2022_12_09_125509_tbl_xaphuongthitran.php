@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tbl_xaphuongthitran', function (Blueprint $table) {
             $table->bigIncrements('xaid');
             $table->string('name_xa');
-            $table->string('type');
             $table->unsignedBigInteger('maqh');
             $table->foreign('maqh')->references('maqh')->on('tbl_quanhuyen');
             $table->timestamps();
