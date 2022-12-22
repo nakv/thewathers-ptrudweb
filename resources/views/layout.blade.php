@@ -85,7 +85,7 @@
                                 <li><a href="{{ URL::to('/payment') }}"><i class="fa fa-credit-card"></i> Thanh
                                         toán</a>
                                 </li>
-                                <li><a href="{{ URL::to('/show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ
+                                <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart"></i> Giỏ
                                         hàng</a></li>
                                 <li>
                                     <a href="{{ URL::to('/') }}">
@@ -105,7 +105,7 @@
                                         Thanh
                                         toán</a>
                                 </li>
-                                <li><a href="{{ URL::to('/show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ
+                                <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart"></i> Giỏ
                                         hàng</a></li>
                                 <li>
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i class="fa fa-lock"></i> Đăng

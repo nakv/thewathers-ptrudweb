@@ -114,7 +114,9 @@ class CheckoutController extends Controller
 
     public function logout_checkout()
     {
-        Session::flush();
+        Session::forget('customer_id');
+        Session::forget('customer_name');
+        Session::forget('shipping_id');
         return Redirect('/login-checkout');
     }
 
