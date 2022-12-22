@@ -68,7 +68,7 @@
 
                             <?php
                             
-                            if ($od->order_status != 2) {
+                            if ($od->order_status == 2) {
                                 echo ' <tr>';
                                 echo '<td colspan="5">';
                                 echo ' <h5 align="center">THÔNG TIN CHUYỂN KHOẢN</h5>';
@@ -83,7 +83,7 @@
                                 echo ' <h5>Mọi phản hồi xin liên hệ hotline CSKH: 19000000</h5>';
                                 echo '</td>';
                                 echo ' </tr>';
-                            } elseif ($od->order_status == 2) {
+                            } elseif ($od->order_status == 3) {
                                 echo ' <tr>';
                                 echo '<td colspan="5">';
                                 echo ' <h5 align="center">THÔNG TIN THẺ TÍN DỤNG</h5>';
