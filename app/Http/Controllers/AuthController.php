@@ -30,7 +30,7 @@ class AuthController extends Controller
         $admin = new Admin;
         $admin->admin_name = $data['admin_name'];
         $admin->admin_email = $data['admin_email'];
-        $admin->admin_phone = $data['phone'];
+        $admin->admin_phone = $data['admin_phone'];
         $admin->admin_password = md5($data['admin_password']);
         $admin->save();
         return Redirect::to('/register-auth')->with('message', 'Đăng ký thành công!');
