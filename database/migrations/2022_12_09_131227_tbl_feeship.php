@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_payment', function (Blueprint $table) {
+        Schema::create('tbl_feeship', function (Blueprint $table) {
             $table->bigIncrements('fee_id');
             $table->integer('fee_matp');
             $table->integer('fee_maqh');
